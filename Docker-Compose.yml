@@ -16,5 +16,6 @@ services:
     image: akhilchennu/chat_react
     ports:
      - 3000:3000
-
+    depends_on:
+     - backend
 #docker-compose up -d
