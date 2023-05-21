@@ -1,0 +1,20 @@
+version: '1'
+services:
+   backend:
+    container_name: chat_node
+    build:
+      context: ./server
+      dockerfile: DockerFile
+    image: akhilchennu/chat_node
+    ports:
+      - 3001:3001
+   frontend:
+    container_name: chat_react
+    build: 
+       context: ./client
+       dockerfile: DockerFile
+    image: akhilchennu/chat_react
+    ports:
+     - 3000:3000
+
+#docker-compose up -d
