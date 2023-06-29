@@ -18,4 +18,11 @@ services:
      - 3000:3000
     depends_on:
      - backend
-#docker-compose up -d
+   redis:
+    container_name: chat_redis
+    image: redis
+    ports:
+      - 6379:6379
+#to check if any error occurs =>docker-compose config .It will return file content if no erros
+#to build the docker file docker-compose build      
+#docker-compose up -d for running the docker compose file
