@@ -26,3 +26,4 @@ services:
 #to check if any error occurs =>docker-compose config .It will return file content if no erros
 #to build the docker file docker-compose build      
 #docker-compose up -d for running the docker compose file
+#docker exec -it 5ae4c4391c4b redis-cl for redis cli inside docker container
