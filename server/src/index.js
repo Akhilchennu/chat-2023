@@ -4,10 +4,12 @@ const { createHandler } = require('graphql-http/lib/use/http');
 const RootSchema = require('./graphql/schema/index.js');
 const routes = require('./routes/routes.js')
 const { graphqlHTTP } = require('express-graphql');
+const cors = require('cors');
 require('./configarations/dbConfig');
 // const client=require('./configarations/reddisConfig')
 const envport = config.port
 const app = express();
+app.use(cors({ origin: 'http://localhost:3002' })); 
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
@@ -36,6 +38,9 @@ app.use(routes)
 app.use('/graphql', graphqlHTTP({
   schema: RootSchema,
   graphiql: true,
+  cors:{
+    origin: 'http://localhost:3002'
+  }
 }))
 app.get('/', (req, res) => {
   res.status(200).send("sucess")

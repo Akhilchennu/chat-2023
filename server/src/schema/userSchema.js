@@ -8,7 +8,7 @@ const userSchema=new mongoose.Schema({
         trim:true,
         validate(value){
             if(!validator.isAlpha(value)){
-                throw new error('name should be only aplhabets')
+                throw new Error('name should be only aplhabets')
             }
         }
     },
@@ -20,7 +20,7 @@ const userSchema=new mongoose.Schema({
         lowercase:true,
         validate(value){
             if(!validator.isEmail(value)){
-                throw new error('Email is invalid')
+                throw new Error('Email is invalid')
             }
         }
     },
@@ -28,6 +28,13 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true,
         minlength:8,
+        validate(value){
+            if(!validator.isStrongPassword(value)){
+                throw new Error(
+                    'Weak password check password guide'
+                )
+            }
+        }
     }
  })
 

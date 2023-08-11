@@ -12,3 +12,4 @@ ENV NODE_ENV=local
 
 CMD ["npm", "start"]
 
+#docker build . -f DockerFile

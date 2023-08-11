@@ -3,12 +3,38 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {ApolloClient,ApolloProvider,InMemoryCache} from '@apollo/client'
+import { createHttpLink } from 'apollo-link-http';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './reducers/rootReducer.js';
+import thunkMiddleware from 'redux-thunk';
 
+const httpLink = createHttpLink({
+  uri: "http://localhost:3003/graphql"
+})
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware:[thunkMiddleware]
+});
+
+const client=new ApolloClient({
+  link:httpLink,
+  cache:new InMemoryCache(),
+  onError: (error) => {
+    console.error('Apollo Client network error:', error);
+  },
+})
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <ApolloProvider client={client} >
+    <Provider store={store} >
     <App />
-  </React.StrictMode>
+    </Provider>
+  </ApolloProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

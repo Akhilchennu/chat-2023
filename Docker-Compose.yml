@@ -1,13 +1,5 @@
 version: '1'
 services:
-   backend:
-    container_name: chat_node
-    build:
-      context: ./server
-      dockerfile: DockerFile
-    image: akhilchennu/chat_node
-    ports:
-      - 3001:3001
    frontend:
     container_name: chat_react
     build: 
@@ -23,6 +15,17 @@ services:
     image: redis
     ports:
       - 6379:6379
+    command: ["redis-server"]
+   backend:
+    container_name: chat_node
+    build:
+      context: ./server
+      dockerfile: DockerFile
+    image: akhilchennu/chat_node
+    ports:
+      - 3001:3008 #node application running on 3008 port in the container as we have configured env local in DOCKERFILE it is taking from .env_local and we are hosting it on 3001 port in our server/machine
+    depends_on:
+      - redis
 #to check if any error occurs =>docker-compose config .It will return file content if no erros
 #to build the docker file docker-compose build      
 #docker-compose up -d for running the docker compose file

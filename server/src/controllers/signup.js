@@ -7,7 +7,7 @@ const SignUp = async (args) => {
         if(userExists){
             return {
                 success:false,
-                error:"user already registered"
+                error:"User account already exists"
             }
         }
         const user = new userModel({name,email,password});
@@ -15,7 +15,7 @@ const SignUp = async (args) => {
        return { success: true,error:null };
     }
     catch (error) {
-        return ({ success: false, error: error });
+        return ({ success: false, error:JSON.stringify(error) });
     }
 }
 

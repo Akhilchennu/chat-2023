@@ -22,7 +22,7 @@ const signUpMutation = {
 
     },
     resolve: (async (root, args, context, info) => {
-        const signUpData =await SignUpController(args);
+        const signUpData = await SignUpController(args);
         return signUpData;
     })
     // }
